@@ -13,7 +13,8 @@ export default async function(req, context) {
 
   try {
     const store = getStore('engagement-configs');
-    await store.setJSON(ref, { ...config, createdAt: new Date().toISOString() });
+    const configJson = JSON.stringify({ ...config, createdAt: new Date().toISOString() });
+    await store.set(ref, configJson);
     return new Response(JSON.stringify({ ref }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
