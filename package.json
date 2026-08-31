@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "netlify dev"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@netlify/blobs": "^6.0.0"
+  },
   "devDependencies": {}
 }
