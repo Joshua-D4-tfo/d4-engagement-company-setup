@@ -8,7 +8,11 @@ export default async function(req, context) {
 
   try {
     const store = getStore('engagement-configs');
-    const config = await store.getJSON(ref);
+    const blob = await store.get(ref);
+    if (!blob) {
+      return new Response(JSON.stringify({ error: 'Configuration not found' }), { status: 404 });
+    }
+    const config = JSON.parse(await blob.text());
     return new Response(JSON.stringify(config), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
